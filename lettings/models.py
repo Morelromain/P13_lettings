@@ -1,11 +1,11 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
-from django.contrib.auth.models import User
+
 
 class Address(models.Model):
 
     class Meta:
-            verbose_name_plural = "Addresses"
+        verbose_name_plural = "Addresses"
 
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
     street = models.CharField(max_length=64)
@@ -24,4 +24,3 @@ class Letting(models.Model):
 
     def __str__(self):
         return self.title
-

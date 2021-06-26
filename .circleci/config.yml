@@ -20,5 +20,5 @@ jobs:
           name: Run tests
           command: pytest
       - run:
-          name: flake8
+          name: PEP8 validation
           command: flake8
