@@ -1,0 +1,10 @@
+.circleci
+.git
+.pytest_cache
+venv
+
+.dockerignore
+.gitignore
+
+**/__pycache__
+*.pyc
