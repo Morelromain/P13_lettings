@@ -5,7 +5,7 @@ orbs:
 
 
 jobs:
-  build-and-test:
+  build_and_test:
     docker:
       - image: cimg/python:3.8
     steps:
@@ -19,18 +19,7 @@ jobs:
           name: PEP8 validation
           command: flake8
 
-  docker_container:
-    executor: python/default
-    steps:
-      - checkout   
-      - setup_remote_docker:
-          version: 20.10.2
-      - run:
-          name: Building and push container
-          command: |
-            docker build -t $DOCKER_USER/docker-oclettings:$CIRCLE_SHA1 .
-            echo $DOCKER_ACCESS_TOKEN | docker login -u $DOCKER_USER --password-stdin
-            docker push $DOCKER_USER/docker-oclettings:$CIRCLE_SHA1
+
 
 
   deploy_to_heroku:
@@ -49,17 +38,13 @@ jobs:
 
 
 workflows:
-  build-and-test:
+  build_and_test:
     jobs:
-      - build-and-test
-
-      - docker_container:
-          requires:
-            - build-and-test
-          filters:
-            branches:
-              only: main
+      - build_and_test
 
       - deploy_to_heroku:
           requires:
-            - docker_container
+            - build_and_test
+          filters:
+            branches:
+              only: main
