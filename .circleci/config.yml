@@ -20,7 +20,7 @@ jobs:
           command: flake8
 
   docker_container:
-    executor: default
+    executor: python/default
     steps:
       - checkout   
       - setup_remote_docker:
