@@ -49,7 +49,7 @@ jobs:
 
 
 workflows:
-  Build-and-test:
+  build-and-test:
     jobs:
       - build-and-test
 
