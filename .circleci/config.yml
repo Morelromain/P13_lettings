@@ -19,6 +19,20 @@ jobs:
           name: PEP8 validation
           command: flake8
 
+  docker_container:
+    executor: default
+    steps:
+      - checkout   
+      - setup_remote_docker:
+          version: 20.10.2
+      - run:
+          name: Building and push container
+          command: |
+            docker build -t $DOCKER_USER/docker-oclettings:$CIRCLE_SHA1 .
+            echo $DOCKER_ACCESS_TOKEN | docker login -u $DOCKER_USER --password-stdin
+            docker push $DOCKER_USER/docker-oclettings:$CIRCLE_SHA1
+
+
   deploy_to_heroku:
     machine: true
     steps:
@@ -31,14 +45,21 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a django-lettings web
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a django-lettings web
 
+
+
+
 workflows:
   Build-and-test:
     jobs:
       - build-and-test
 
-      - deploy_to_heroku:
+      - docker_container:
           requires:
             - build-and-test
           filters:
             branches:
               only: main
+
+      - deploy_to_heroku:
+          requires:
+            - docker_container
