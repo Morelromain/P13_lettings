@@ -26,6 +26,7 @@ jobs:
       - run:
           name: Build and push Docker image to Heroku
           command: |
+            docker login -u romainmoreldocker -p 86Thelegend86@
             docker build -t romainmoreldocker/django-lettings:$CIRCLE_SHA1 .
             docker push romainmoreldocker/django-lettings:$CIRCLE_SHA1
             sudo curl https://cli-assets.heroku.com/install.sh | sh
