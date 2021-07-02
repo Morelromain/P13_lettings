@@ -32,8 +32,6 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a django-lettings web
 
 
-
-
 workflows:
   build_and_test:
     jobs:
