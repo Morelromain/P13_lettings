@@ -5,6 +5,7 @@ orbs:
 
 
 jobs:
+
   build_and_test:
     docker:
       - image: cimg/python:3.8
@@ -19,20 +20,28 @@ jobs:
           name: PEP8 validation
           command: flake8
 
+  deploy_to_docker_hub:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push image to Docker_hub
+          command: |
+            docker login -u ${HUB_NAME} -p ${HUB_PSWD}
+            docker build -t ${HUB_NAME}/${IMG_NAME}:$CIRCLE_SHA1 .
+            docker push ${HUB_NAME}/${IMG_NAME}:$CIRCLE_SHA1
+
   deploy_to_heroku:
     machine: true
     steps:
       - checkout
       - run:
-          name: Build and push Docker image to Heroku
+          name: Build and push image to Heroku
           command: |
-            docker login -u romainmoreldocker -p 86Thelegend86@
-            docker build -t romainmoreldocker/django-lettings:$CIRCLE_SHA1 .
-            docker push romainmoreldocker/django-lettings:$CIRCLE_SHA1
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a django-lettings web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a django-lettings web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${IMG_NAME} web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${IMG_NAME} web
 
 
 workflows:
@@ -41,9 +50,16 @@ workflows:
     
       - build_and_test
 
-      - deploy_to_heroku:
+      - deploy_to_docker_hub:
           requires:
             - build_and_test
+          filters:
+            branches:
+              only: main
+
+      - deploy_to_heroku:
+          requires:
+            - deploy_to_docker_hub
           filters:
             branches:
               only: main
