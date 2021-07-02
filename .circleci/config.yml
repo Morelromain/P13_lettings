@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.2
+  docker: circleci/docker@1.4.0
 
 
 jobs:
