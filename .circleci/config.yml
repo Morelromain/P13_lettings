@@ -15,7 +15,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command: DJANGO_SETTINGS_MODULE=local pytest
+          command: pytest --ds=local
       - run:
           name: PEP8 validation
           command: flake8
