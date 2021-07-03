@@ -28,8 +28,8 @@ jobs:
           name: Build and push image to Docker_hub
           command: |
             docker login -u ${HUB_NAME} -p ${HUB_PSWD}
-            docker build -t ${HUB_NAME}/${IMG_NAME}:$CIRCLE_SHA1 .
-            docker push ${HUB_NAME}/${IMG_NAME}:$CIRCLE_SHA1
+            docker build -t ${HUB_NAME}/django-lettings:$CIRCLE_SHA1 .
+            docker push ${HUB_NAME}/django-lettings:$CIRCLE_SHA1
 
   deploy_to_heroku:
     machine: true
@@ -40,8 +40,12 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${IMG_NAME} web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${IMG_NAME} web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set PORT=8000 -a django-lettings
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=${DJANGO_SECRET_KEY} -a django-lettings
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_DSN=${SENTRY_DSN} -a django-lettings
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a django-lettings web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a django-lettings web
+
 
 
 workflows:
