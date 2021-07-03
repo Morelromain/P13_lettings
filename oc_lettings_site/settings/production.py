@@ -1,4 +1,6 @@
 from .base import *
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 
 # Quick-start development settings - unsuitable for production
