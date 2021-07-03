@@ -15,7 +15,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command: pytest --ds=local
+          command: pytest
       - run:
           name: PEP8 validation
           command: flake8
