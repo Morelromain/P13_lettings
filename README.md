@@ -75,3 +75,98 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+## Déploiement
+
+### Fonctionnement du déploiement
+
+Utilisation de pipeline avec CircleCi pour : 
+- Remonté automatique du projet à chaque mise à jour Git Hub
+- L'analyse des tests, 
+- Déploiement en ligne de l'application par Heroku 
+- Sauvegarde/gestion d'image en ligne par Docker Hub
+- Suivis des erreurs et performances par Sentry
+
+### Configuration requise
+
+Création de Compte requise pour: 
+- Git Hub
+- Circleci 
+- Docker Hub, 
+- Heroku, 
+- Sentry necessaire
+
+### Etapes nécessaires
+
+#### Mise en place de Circle CI
+
+Liaison du projet à Circle CI:
+- Connectez vous.
+- Verifiez que votre compte Circle Ci est bien relié votre compte GitHub
+- Allez dans `Projets`
+- Cliquez sur `Set Up Project`
+- Choisissez votre projet GitHub
+- Retournez ensuite sur la `Dash Board`
+
+Création de variable d'environnement
+- Dans `All Project` Selectionnez votre projet
+- Cliquez sur `Project Settings`
+- Cliquez sur `Environment Variables`
+- Cliquez sur `Add Environment Variables`
+
+|   Nom des Variable à ajouter  |   Description   |   Exemple   |
+|---    |---   |---    |
+|   DJANGO_SECRET_KEY   |   Clef django   |   `fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s`   |
+|   DJANGO_SETTINGS_MODULE   |   Fichier de settings à utiliser   |   `Production`  |
+|   HEROKU_TOKEN   |   Token d'identification Heroku   |   `c4cd94da15ea0544802c2cfd5ec4ead324327430`   |
+|   HUB_NAME   |   Le nom de votre compte Dockerhub   |   `RomainMorelDocker`   |
+|   HUB_PSWD   |   Votre mot de passe Dockerhub   |   `M0t_de_Pa$$e`   |
+|   SENTRY_NAME   |   Token Sentry   |   `https://e6083@o896872.ingest.sentry.io/5841364`   |
+|   HEROKU_APP_NAME   |   Nom de votre appli sous heroku   |   `django-lettings1`   |
+
+Pour récupérer votre Token Heroku, tapez la commande :  
+```heroku auth:token```
+
+Pour récupérer votre Token Sentry :  
+https://sentry.io -> Settings -> Projects -> Client Keys
+
+
+#### Mise en place de Docker HUB
+
+Installer le client Docker :
+https://docs.docker.com/engine/install/
+
+Création du dépôt dans docker Hub
+- Cliquer sur `Create Repository`
+- Ecrivez `django-lettings` et validez
+
+
+#### Mise en place de Heroku
+
+Installer le client Heroku :
+https://devcenter.heroku.com/articles/heroku-cli
+
+Création de l'application dans heroku
+- Cliquer sur `New`
+- Cliquer sur `Create new app`
+- Ecrivez par exemple `django-lettings1` et validez
+
+
+#### Deploiement
+
+Effectuer une mise à jour du projet git hub.
+`git add <fichier modifié>`
+`git commit -m "<commentaire>"`
+`git push -u origin`
+
+Rendez vous sur Circle Ci pour voir les "jobs" de votre pipeline s'activer
+- `build_and_test` monte et effectue les tests du bon fonctionnement de l'appli, via Pytest et Flake8
+- `deply_to_docker_hub` envoie l'image du projet sur docker hub (uniquement branche master)
+- `deply_to_heroku` envoie le projet sur heroku et le deploie (uniquement branche master)
+
+Vous pouvez desormais acceder à votre application en ligne :
+soit en cliquant sur `open app` de votre compte heroku
+soit avec `https://<nom de l'appli>.herokuapp.com/` dans votre navigateur
+
+Les surveillance de l'application est ensuite gérable par votre compte sentry 
+https://sentry.io

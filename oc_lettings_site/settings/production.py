@@ -8,7 +8,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 DEBUG = False
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-ALLOWED_HOSTS = ['django-lettings.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 # Sentry configuration
 
