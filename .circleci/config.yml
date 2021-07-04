@@ -18,7 +18,9 @@ jobs:
           environment:
             PYTHONPATH: /home/circleci/project/src
           name: Run tests
-          command: pytest
+          command: |
+            . venv/bin/activate
+            pytest
       - run:
           name: PEP8 validation
           command: flake8
