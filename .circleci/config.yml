@@ -18,7 +18,7 @@ jobs:
       - run:
           #environment:
           #  PYTHONPATH: /home/circleci/project/src
-          command : pip install pytest-pythonpath | pytest
+          command : pytest
           name: Run tests
       - run:
           name: PEP8 validation
