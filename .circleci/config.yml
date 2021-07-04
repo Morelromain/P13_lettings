@@ -14,6 +14,7 @@ jobs:
       - python/install-packages:
           pip-dependency-file: requirements.txt
           pkg-manager: pip
+          command : pip install pytest-pythonpath
       - run:
           #environment:
           #  PYTHONPATH: /home/circleci/project/src
