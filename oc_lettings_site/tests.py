@@ -1,4 +1,3 @@
-'''
 from django.test import TestCase
 from django.urls import reverse
 
@@ -17,4 +16,3 @@ class OcLettingsSiteTests(TestCase):
         response = self.client.get(self.true_url_index)
         self.assertContains(
             response, "Holiday Homes", status_code=200)
-'''
