@@ -19,7 +19,7 @@ jobs:
             PYTHONPATH: /home/circleci/project/src
           name: Run tests
           command: |
-            . venv/bin/activate
+            . venv/Scripts/activate
             pytest
       - run:
           name: PEP8 validation
