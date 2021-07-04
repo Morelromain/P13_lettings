@@ -10,15 +10,16 @@ jobs:
     docker:
       - image: cimg/python:3.8
     steps:
-      - checkout
+      - checkout:
+          path: /home/circleci/project/src
       - python/install-packages:
           pip-dependency-file: requirements.txt
           pkg-manager: pip
       - run:
+          #environment:
+          #PYTHONPATH: /home/circleci/project/src
           name: Run tests
-          command: |
-            . venv/Scripts/activate
-            pytest
+          command: pytest
       - run:
           name: PEP8 validation
           command: flake8
