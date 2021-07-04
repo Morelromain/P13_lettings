@@ -14,11 +14,11 @@ jobs:
       - python/install-packages:
           pip-dependency-file: requirements.txt
           pkg-manager: pip
-      #- run:
+      - run:
           #environment:
           #  PYTHONPATH: /home/circleci/project/src
-          #name: Run tests
-          #command: pytest
+          name: Run tests
+          command: pytest
       - run:
           name: PEP8 validation
           command: flake8
