@@ -1,8 +1,13 @@
+import os
+from django.core.wsgi import get_wsgi_application
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
 
-from .models import Profile
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "oc_lettings_site.settings.local")
+application = get_wsgi_application()
+
+from django.contrib.auth.models import User
+from profiles.models import Profile
 
 
 class ProfilesTests(TestCase):
