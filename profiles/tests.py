@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 from django.contrib.auth.models import User
-from profiles.models import Profile
+from .models import Profile
 
 
 class ProfilesTests(TestCase):

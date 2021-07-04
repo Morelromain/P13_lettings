@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 
-from lettings.models import Letting, Address
+from .models import Letting, Address
 
 
 
