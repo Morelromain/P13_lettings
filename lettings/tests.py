@@ -1,10 +1,9 @@
-import os
-from django.core.wsgi import get_wsgi_application
+
 from django.test import TestCase
 from django.urls import reverse
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "oc_lettings_site.settings.local")
-application = get_wsgi_application()
+
+
 
 from lettings.models import Letting, Address
 
