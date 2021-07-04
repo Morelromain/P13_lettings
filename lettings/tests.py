@@ -1,14 +1,8 @@
-
+'''
 from django.test import TestCase
 from django.urls import reverse
 
-
-
-
 from .models import Letting, Address
-
-
-
 
 class LettingsTests(TestCase):
 
@@ -35,3 +29,4 @@ class LettingsTests(TestCase):
         response = self.client.get(self.url_lettings)
         self.assertContains(
             response, text="street_adress", count=1, status_code=200)
+'''
