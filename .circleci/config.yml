@@ -16,12 +16,11 @@ jobs:
           pkg-manager: pip
           
       - run:
-          #environment:
-          #  PYTHONPATH: /home/circleci/project/src
-          command : pytest
           name: Run tests
+          command : pytest
+          
       - run:
-          name: PEP8 validation
+          name: linting PEP8
           command: flake8
 
   deploy_to_docker_hub:
@@ -44,16 +43,16 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set PORT=8000 -a django-lettings
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} -a django-lettings
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_NAME=${SENTRY_NAME} -a django-lettings
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a django-lettings web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a django-lettings web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set PORT=8000 -a ${HEROKU_APP_NAME}
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} -a ${HEROKU_APP_NAME}
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_NAME=${SENTRY_NAME} -a ${HEROKU_APP_NAME}
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${HEROKU_APP_NAME} web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${HEROKU_APP_NAME} web
 
 
 
 workflows:
-  build_and_test:
+  build_test_deploy:
     jobs:
     
       - build_and_test

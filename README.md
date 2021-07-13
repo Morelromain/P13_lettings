@@ -124,7 +124,7 @@ Création de variable d'environnement
 |   DJANGO_SETTINGS_MODULE   |   Fichier de settings à utiliser   |   `oc_lettings_site.settings.production`  |
 |   HEROKU_TOKEN   |   Token d'identification Heroku   |   `c4cd94da15ea0544802c2cfd5ec4ead324327430`   |
 |   HUB_NAME   |   Le nom de votre compte Dockerhub   |   `RomainMorelDocker`   |
-|   HUB_PSWD   |   Votre mot de passe Dockerhub   |   `M0t_de_Pa$$e`   |
+|   HUB_PSWD   |   Votre mot de passe ou token Dockerhub   |   `M0t_de_Pa$$e ou 93098a-1cbe-447d-9059-e93b888b433c`   |
 |   SENTRY_NAME   |   Token Sentry   |   `https://e6083@o896872.ingest.sentry.io/5841364`   |
 |   HEROKU_APP_NAME   |   Nom de votre appli sous heroku   |   `heroku-lettings1`   |
 
@@ -133,6 +133,9 @@ Pour récupérer votre Token Heroku, tapez la commande :
 
 Pour récupérer votre Token Sentry :    
 https://sentry.io -> Settings -> Projects -> Client Keys  
+
+Pour récupérer votre Token Docker Hub:
+https://hub.docker.com/settings/security -> New access token
 
 ### Etape 2 : Mise en place de Docker HUB
 
@@ -147,7 +150,7 @@ Création de l'application dans heroku
 - Cliquer sur `Create new app`  
 - Ecrivez par exemple `heroku-lettings1` et validez  
 
-### Deploiement
+### Etape 4 : Deploiement
 
 Déploiement Effectué à chaque mise à jour du projet git hub.  
 `git add <fichier modifié>`  
@@ -168,6 +171,8 @@ https://sentry.io
 Vous pouvez tester sentry en vous rendant à la page :  
 `https://<nom de l'appli>.herokuapp.com/sentry-debug`  
 vous génèrerez alors un "Issue" (problème) `ZeroDivisionError` dans sentry  
+
+### Etape 5 : Récupération du projet en local
 
 Vous pouvez récuperer l'image de docker hub et le lancer en local en une commande:  
 docker run --pull always -p 8000:8000 --name <nom_local> <compte_hub>/<nom_app_hub>:<TAG>  
