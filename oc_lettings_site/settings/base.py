@@ -1,12 +1,6 @@
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.realpath(os.path.dirname(__file__) + "/.."))
-
-#DJANGO_SETTINGS_MODULE = "local"
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'lettings',
