@@ -166,19 +166,18 @@ Rendez vous sur votre compte Circle Ci pour voir les "jobs" de votre pipeline s'
 - `deply_to_heroku` envoie le projet sur heroku et le deploie (uniquement si branche master)  
 
 Vous pouvez desormais acceder à votre application en ligne :  
-soit en cliquant sur `open app` de l'app de votre compte heroku  
-soit avec `https://<nom de l'appli>.herokuapp.com/` dans votre navigateur  
+`https://<nom de l'appli>.herokuapp.com/`
 
-La surveillance de l'application est ensuite gérable par votre compte sentry  
-https://sentry.io
+La surveillance de l'application est ensuite gérable via :  
+https://sentry.io  
 Vous pouvez tester sentry en vous rendant à la page :  
 `https://<nom de l'appli>.herokuapp.com/sentry-debug`  
-vous génèrerez alors un "Issue" (problème) `ZeroDivisionError` dans sentry  
+Vous génèrerez alors un "Issue" `ZeroDivisionError` dans sentry.  
 
 ### Etape 5 : Récupération du projet en local
 
-Vous pouvez récuperer l'image de docker hub et le lancer en local en une commande:  
-docker run --pull always -p 8000:8000 --name <nom_local> <compte_hub>/<nom_app_hub>:<TAG>  
+Pour récuperer l'image de docker hub et le lancer en local en une commande:  
+`docker run --pull always -p 8000:8000 --name <nom_local> <compte_hub>/<nom_app_hub>:<TAG>` 
 <nom_local> correspond à un nom de votre choix ex : save_lettings_01_08_21  
 
 <compte_hub> correspond à votre nom de compte ex : romainmoreldocker  
