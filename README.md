@@ -2,6 +2,9 @@
 
 Site web d'Orange County Lettings
 
+![Orange County Lettings image](OCL.png)
+
+
 ## Développement local
 
 ### Prérequis
