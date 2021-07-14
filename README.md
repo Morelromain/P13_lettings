@@ -177,9 +177,9 @@ Vous génèrerez alors un "Issue" `ZeroDivisionError` dans sentry.
 ### Etape 5 : Récupération du projet en local
 
 Pour récuperer l'image de docker hub et le lancer en local en une commande:  
-`docker run --pull always -p 8000:8000 --name <nom_local> <compte_hub>/<nom_app_hub>:<TAG>` 
-<nom_local> correspond à un nom de votre choix ex : save_lettings_01_08_21  
+`docker run --pull always -p 8000:8000 --name <nom_local> <compte_hub>/<nom_app_hub>:<TAG>`  
 
-<compte_hub> correspond à votre nom de compte ex : romainmoreldocker  
-<nom_app_hub> correspond au nom de votre app sur Docker Hub, ici : django-lettings  
-<TAG> Le hachage SHA1 du commit git-hub, vous le trouverez dans votre Dépot Docker Hub en cliquant sur `Tags`
+`<nom_local>` correspond à un nom de votre choix ex : save_lettings_01_08_21  
+`<compte_hub>` correspond à votre nom de compte ex : romainmoreldocker  
+`<nom_app_hub>` correspond au nom de votre app sur Docker Hub, ici : django-lettings  
+`<TAG>` Le hachage SHA1 du commit git-hub, vous le trouverez dans votre Dépot Docker Hub en cliquant sur `Tags`
