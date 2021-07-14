@@ -12,7 +12,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG=0
 ENV PORT 8000
-ENV DJANGO_SECRET_KEY="fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
 
 # Install  requirements.
 COPY requirements.txt .
