@@ -26,4 +26,8 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = ''
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/'),
+]
