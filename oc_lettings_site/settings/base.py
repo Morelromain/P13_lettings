@@ -5,6 +5,7 @@ BASE_DIR = os.path.dirname(os.path.realpath(os.path.dirname(__file__) + "/.."))
 
 DJANGO_SETTINGS_MODULE = "local"
 
+
 # Application definition
 
 INSTALLED_APPS = [

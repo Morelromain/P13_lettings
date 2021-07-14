@@ -12,8 +12,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG=0
 ENV PORT 8000
-ENV SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
-ENV DJANGO_SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
+#ENV SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
+#ENV DJANGO_SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
 
 # Install  requirements.
 COPY requirements.txt .
@@ -25,4 +25,5 @@ COPY . /app/
 # Collect all static files in app.
 RUN python manage.py collectstatic --noinput -c
 # Start app
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT -e DJANGO_SETTINGS_MODULE=oc_lettings_site.settings.local
+    
