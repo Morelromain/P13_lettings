@@ -7,7 +7,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 DEBUG = False
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+#SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
 ALLOWED_HOSTS = ['.herokuapp.com']
 
 # Sentry configuration
@@ -26,4 +27,3 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
