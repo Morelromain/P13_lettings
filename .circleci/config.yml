@@ -1,8 +1,9 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@1.2
 
+  python: circleci/python@1.2
+  heroku: circleci/heroku@1.2.6
 
 jobs:
 
@@ -49,9 +50,8 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${HEROKU_APP_NAME} web
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${HEROKU_APP_NAME} web
 
-
-
 workflows:
+
   build_test_deploy:
     jobs:
     
